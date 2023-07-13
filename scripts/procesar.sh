@@ -1,24 +1,22 @@
 #!/bin/bash
 
-# Carpeta de entrada con las imágenes descomprimidas
-carpeta_entrada="almacenamiento"
+# Carpeta de entrada con las imágenes
+directorio_entrada="/home/jack/tp_edp_2023/trabajopractico_edp_2023/scripts/almacenamiento"
 
 # Carpeta de salida para las imágenes procesadas
-carpeta_salida="imagenes_procesadas"
+directorio_salida="imagenes_procesadas"
 
 # Verificar si la carpeta de salida existe, si no, crearla
-if [ ! -d "$carpeta_salida" ]; then
-  mkdir "$carpeta_salida"
+if [ ! -d "$directorio_salida" ]; then
+  mkdir "$directorio_salida"
 fi
 
-# Obtener la lista de imágenes válidas para procesar (nombres de archivo que cumplen con el patrón)
-lista_imagenes_validas=$(find "$carpeta_entrada" -type f -name '[A-Z]*.jpg')
-
 # Recortar las imágenes a una resolución de 512x512 utilizando ImageMagick
-for imagen in $lista_imagenes_validas; do
+for imagen in "$directorio_entrada"/*.jpg; do
   nombre_archivo=$(basename "$imagen")
-  convert "$imagen" -resize 512x512 "$carpeta_salida/$nombre_archivo"
-  echo "Imagen procesada: $nombre_archivo"
+  convert $imagen -gravity center -resize 512x512+0+0 \-extent 512x512 > salida.jpg
+    echo "Imagen procesada: $nombre_archivo"
+
 done
 
 echo "Proceso de procesamiento de imágenes completado."
