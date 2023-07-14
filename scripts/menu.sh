@@ -1,9 +1,9 @@
 #!/bin/bash
 
 while true; do
-  echo "Seleccione una opción:"
+  echo "Seleccione la opción deseada:"
   echo "1. Generar imágenes"
-  echo "2. Descomprimir archivos"
+  echo "2. Descomprimir"
   echo "3. Procesar imágenes"
   echo "4. Comprimir archivos"
   echo "5. Salir"
@@ -32,6 +32,4 @@ while true; do
       ;;
   esac
 done
-
-echo "Programa finalizado."
 
