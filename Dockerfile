@@ -1,19 +1,17 @@
-# Imagen base
+# Utiliza una imagen de Alpine como base
 FROM alpine
 
-# Actualizar paquetes e instalar dependencias
-RUN apk update && apk add bash imagemagick
+# Copia los archivos necesarios al contenedor
+COPY generar.sh /
+COPY descomprimir.sh /
+COPY procesar.sh /
+COPY menu.sh /
+COPY comprimir.sh /
 
-# Copiar los scripts al contenedor
+# Establece los permisos de ejecución para los scripts
+RUN chmod +x /*.sh
 
+# Ejecuta el script menu.sh por defecto cuando se inicie el contenedor
+CMD ["/menu.sh"]
 
-# Establecer el directorio de trabajo
-WORKDIR /app
-
-ADD script2 script2
-# Establecer permisos de ejecución en los scripts
-RUN chmod +x *.sh
-
-# Ejecutar el menú por defecto al iniciar el contenedor
-CMD ["bash", "/app/script2/menu.sh"]
 
